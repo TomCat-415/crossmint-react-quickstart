@@ -1,33 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crossmint React Quickstart (Solana)
 
-## Getting Started
+This is a demo Next.js project showing how to integrate Crossmint Wallets and JWT authentication into a modern React app. Built from create-next-app and extended with TypeScript, TailwindCSS, and the Crossmint React SDK.
 
-First, run the development server:
+---
 
+## 🚀 Getting Started
+
+### 1. Clone & Install
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/TomCat-415/crossmint-react-quickstart.git
+cd crossmint-react-quickstart
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Environment Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` file with your client key:
+```env
+NEXT_PUBLIC_CROSSMINT_API_KEY=ck_staging_12345
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Run Dev Server
+```bash
+pnpm dev
+```
 
-## Learn More
+App runs at [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠 Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+• ✅ Next.js 15 (App Router) with Turbopack
+• ✅ TypeScript + TailwindCSS v4
+• ✅ Crossmint Wallet integration
+• ✅ JWT Auth (Crossmint Auth)
+• ✅ Named exports + barrel file (`src/components/index.ts`)
+• ✅ Components:
+  - `AuthButton` → Login/Logout
+  - `WalletStatus` → Show wallet connection
+
+---
+
+## 📌 Next Steps
+
+• Style login/logout buttons with Tailwind
+• Display wallet balance & NFTs
+• Add transaction signing demo
+• Deploy to Vercel with production API keys
+
+---
+
+## 📚 Learn More
+
+- [Crossmint Docs](https://docs.crossmint.com/)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
+- [Crossmint React SDK](https://www.npmjs.com/package/@crossmint/client-sdk-react-ui)
 
 ## Deploy on Vercel
 
