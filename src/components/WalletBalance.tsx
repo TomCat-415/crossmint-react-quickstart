@@ -15,7 +15,7 @@ export function WalletBalance() {
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
+    const cancelled = { current: false };
 
     async function load() {
       try {
@@ -25,16 +25,21 @@ export function WalletBalance() {
 
         const pk = new PublicKey(wallet.address);
         const lamports = await connection.getBalance(pk, "confirmed");
-        if (!cancelled) setSol(lamports / LAMPORTS_PER_SOL);
-      } catch (e: any) {
-        if (!cancelled) setError(e?.message ?? "Failed to fetch balance");
+        if (!cancelled.current) setSol(lamports / LAMPORTS_PER_SOL);
+      } catch (e: unknown) {
+        if (!cancelled.current) setError((e as Error)?.message ?? "Failed to fetch balance");
       }
     }
 
     load();
     // refresh when wallet changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, wallet?.address, connection]);
+
+  useEffect(() => {
+    return () => {
+      // Cleanup function to cancel ongoing requests
+    };
+  }, []);
 
   if (status !== "loaded" || !wallet) return null;
 

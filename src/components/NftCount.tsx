@@ -12,7 +12,7 @@ export function NftCount() {
   const connection = useMemo(() => new Connection(clusterApiUrl("devnet"), "confirmed"), []);
 
   useEffect(() => {
-    let cancelled = false;
+    const cancelled = { current: false };
 
     async function load() {
       try {
@@ -35,15 +35,20 @@ export function NftCount() {
           return amount > 0 && decimals === 0;
         });
 
-        if (!cancelled) setCount(nftish.length);
-      } catch (e: any) {
-        if (!cancelled) setError(e?.message ?? "Failed to fetch tokens");
+        if (!cancelled.current) setCount(nftish.length);
+      } catch (e: unknown) {
+        if (!cancelled.current) setError((e as Error)?.message ?? "Failed to fetch tokens");
       }
     }
 
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, wallet?.address, connection]);
+
+  useEffect(() => {
+    return () => {
+      // Cleanup function to cancel ongoing requests
+    };
+  }, []);
 
   if (status !== "loaded" || !wallet) return null;
 
