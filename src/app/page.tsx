@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AuthButton, WalletStatus } from "@/components";   // ✅ nice & clean
+import { AuthButton, WalletStatus, WalletBalance } from "@/components";   // ✅ nice & clean
 
 export default function Home() {
   return (
@@ -10,6 +10,11 @@ export default function Home() {
           <AuthButton />
           <WalletStatus />
         </div>
+
+        <div className="flex items-center gap-4">
+          <WalletBalance />
+        </div>
+        
         <Image
           className="dark:invert"
           src="/next.svg"
