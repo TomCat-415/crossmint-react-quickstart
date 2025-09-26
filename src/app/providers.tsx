@@ -9,12 +9,12 @@ import {
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <CrossmintProvider apiKey={process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_API_KEY!}>
-      <CrossmintAuthProvider>
+      <CrossmintAuthProvider loginMethods={["google", "email"]}>
         <CrossmintWalletProvider
           createOnLogin={{
             chain: "solana",
             signer: {
-              type: "api-key",
+              type: "email",
             },
           }}
         >
