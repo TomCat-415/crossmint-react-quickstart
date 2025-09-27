@@ -1,15 +1,35 @@
+"use client";
+import { EmbeddedAuthForm, useAuth, useWallet } from "@crossmint/client-sdk-react-ui";
 import Image from "next/image";
 import { AuthButton, WalletStatus, WalletBalance, NftCount } from "@/components";   // ✅ nice & clean
 
 export default function Home() {
+  const { jwt } = useAuth();
+  const { status: walletStatus } = useWallet();
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1 className="text-2xl font-semibold">Crossmint React Quickstart (Solana)</h1>
-        <div className="flex items-center gap-4">
-          <AuthButton />
-          <WalletStatus />
-        </div>
+        {!jwt && (
+          <div className="flex flex-col gap-4 w-full max-w-sm">
+            <EmbeddedAuthForm />
+            <div className="flex items-center gap-3">
+              <div className="h-px flex-1 bg-white/20" />
+              <span className="text-xs text-white/60">or</span>
+              <div className="h-px flex-1 bg-white/20" />
+            </div>
+            <div className="flex items-center gap-4">
+              <AuthButton />
+              <WalletStatus />
+            </div>
+          </div>
+        )}
+        {jwt && (
+          <div className="flex items-center gap-4">
+            <AuthButton />
+            <WalletStatus />
+          </div>
+        )}
 
         <div className="flex items-center gap-4">
           <WalletBalance />
